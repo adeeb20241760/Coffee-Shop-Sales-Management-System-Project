@@ -221,7 +221,8 @@ __marimo__/
 # =========================================================================
 
 # 1. Database Credentials & Local Configuration Keys
-.streamlit/secrets.toml
+*.json                    # Blocks Google Cloud Service Account JSON keys
+.streamlit/secrets.toml    # Streamlit local credentials file
 .env
 
 # 2. Local Infrastructure Script (Contains one-time setup keys)
