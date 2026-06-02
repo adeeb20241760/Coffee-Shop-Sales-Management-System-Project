@@ -214,5 +214,30 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Streamlit
+
+
+# =========================================================================
+# COFFEE SHOP PROJECT EXCLUSIONS
+# =========================================================================
+
+# 1. Database Credentials & Local Configuration Keys
 .streamlit/secrets.toml
+.env
+
+# 2. Local Infrastructure Script (Contains one-time setup keys)
+schema.py
+
+# 3. Raw Data Assets (Keep the massive 149k row raw CSV off GitHub)
+*.csv
+*.xlsx
+*.zip
+
+# 4. Binary/Compiled Document Files 
+*.pdf
+*.docx
+*.pptx
+
+# 5. Python System Junk (Auto-generated caches you don't need on GitHub)
+__pycache__/
+*.pyc
+.DS_Store
