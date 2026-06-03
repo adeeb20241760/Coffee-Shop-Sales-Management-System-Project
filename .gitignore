@@ -242,3 +242,8 @@ schema.py
 __pycache__/
 *.pyc
 .DS_Store
+
+# Office Temporary Files
+~$*
+~WRL*.tmp
+*.tmp
