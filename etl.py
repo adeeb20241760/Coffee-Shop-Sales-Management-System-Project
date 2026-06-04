@@ -18,3 +18,7 @@ print(f"Negative values in 'unit_price'? {negative_price}")
 print(f"Negative values in 'transaction_id'? {negative_transaction_id}")
 print(f"Negative values in 'store_id'? {negative_store_id}")
 print(f"Negative values in 'product_id'? {negative_product_id}")
+
+# Duplicate values
+duplicate_rows = coffee_sales.duplicated().sum()
+print(f"Number of duplicate rows: {duplicate_rows}")
