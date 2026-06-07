@@ -16,17 +16,21 @@ else:
     print("No null values found in the dataset.")    
 
 ## Removing Negative Values
-numeric_columns = coffee_sales.select_dtypes(include=['number']).columns
-numeric_columns
+intial_row_count = shape(coffee_sales)[0]
+coffee_sales = coffee_sales[
+    (coffee_sales['transaction_qty'] >= 0) & 
+    (coffee_sales['unit_price'] >= 0) &
+    (coffee_sales['transaction_id'] > 0) &
+    (coffee_sales['store_id'] > 0) &
+    (coffee_sales['product_id'] > 0)
+]  
+negative_values_removed = intial_row_count - shape(coffee_sales)[0]
 
-for column in numeric_columns:
-    negative_values = coffee_sales[coffee_sales[column] < 0 ]
-    if not negative_values.empty:
-        print(f"Negative Values found in column {column}:")
-
-coffee_sales = coffee_sales[(coffee_sales[numeric_columns] >= 0).all(axis=1)]    
-print("Negative values removed from the dataset.")   
-
+if negative_values_removed > 0:
+    print(f"Removed {negative_values_removed} rows with negative values.")
+else:
+    print("No negative values found in the dataset.")   
+    
 ## Removing Duplicates
 initial_row_count = shape(coffee_sales)[0]
 coffee_sales = coffee_sales.drop_duplicates(subset=['transaction_id'])
