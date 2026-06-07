@@ -29,7 +29,7 @@ print("Negative values removed from the dataset.")
 
 ## Removing Duplicates
 initial_row_count = shape(coffee_sales)[0]
-coffee_sales = coffee_sales.drop_duplicates()
+coffee_sales = coffee_sales.drop_duplicates(subset=['transaction_id'])
 duplicates_removed = initial_row_count - shape(coffee_sales)[0]
 
 if duplicates_removed > 0:
