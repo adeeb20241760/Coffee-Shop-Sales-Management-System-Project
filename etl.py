@@ -1,4 +1,5 @@
 # Extarcting data from excel file
+from numpy import shape
 import pandas as pd
 coffee_sales = pd.read_excel('Coffee Shop Sales.xlsx')
 
