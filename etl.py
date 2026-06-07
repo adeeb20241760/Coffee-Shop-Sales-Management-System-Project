@@ -5,10 +5,9 @@ coffee_sales = pd.read_excel('Coffee Shop Sales.xlsx')
 # Transforming data
 
 ## Removing null values
-from numpy import shape
-initial_row_count = shape(coffee_sales)[0] 
+initial_row_count = len(coffee_sales)
 coffee_sales = coffee_sales.dropna()
-null_values_removed = initial_row_count - shape(coffee_sales)[0]
+null_values_removed = initial_row_count - len(coffee_sales)
 
 if null_values_removed > 0:
     print(f"Removed {null_values_removed} rows with null values.")
@@ -16,7 +15,7 @@ else:
     print("No null values found in the dataset.")    
 
 ## Removing Negative Values
-intial_row_count = shape(coffee_sales)[0]
+intial_row_count = len(coffee_sales)
 coffee_sales = coffee_sales[
     (coffee_sales['transaction_qty'] >= 0) & 
     (coffee_sales['unit_price'] >= 0) &
@@ -24,17 +23,17 @@ coffee_sales = coffee_sales[
     (coffee_sales['store_id'] > 0) &
     (coffee_sales['product_id'] > 0)
 ]  
-negative_values_removed = intial_row_count - shape(coffee_sales)[0]
+negative_values_removed = intial_row_count - len(coffee_sales)
 
 if negative_values_removed > 0:
     print(f"Removed {negative_values_removed} rows with negative values.")
 else:
     print("No negative values found in the dataset.")   
-    
+
 ## Removing Duplicates
-initial_row_count = shape(coffee_sales)[0]
+initial_row_count = len(coffee_sales)
 coffee_sales = coffee_sales.drop_duplicates(subset=['transaction_id'])
-duplicates_removed = initial_row_count - shape(coffee_sales)[0]
+duplicates_removed = initial_row_count - len(coffee_sales)
 
 if duplicates_removed > 0:
     print(f"Removed {duplicates_removed} duplicate rows.")
