@@ -46,4 +46,28 @@ coffee_sales['transaction_date'] = pd.to_datetime(coffee_sales['transaction_date
 coffee_sales['transaction_time'] = pd.to_datetime(coffee_sales['transaction_time'], format = '%H:%M:%S').dt.time
 print("Date and Time columns formatted successfully.")    
 
+## Splitting the dataframe to be turned into tables
+
+### Transactions Table
+transaction_df = coffee_sales[['transaction_id','transaction_date', 'transaction_time','transaction_qty','store_id', 'product_id', 'unit_price']].copy().sort_values(by='transaction_id').reset_index(drop=True)
+print("Transactions table created successfully.")
+
+### Products Table
+product_df = coffee_sales[['product_id', 'product_category', 'product_type', 'product_detail']].copy().drop_duplicates(subset='product_id').sort_values(by='product_id').reset_index(drop=True)
+print("Products table created successfully.")
+
+### Stores Table
+store_df = coffee_sales[['store_id','store_location']].copy().drop_duplicates(subset='store_id').sort_values(by='store_id').reset_index(drop=True)
+print("Stores table created successfully.")
+
+### Store_Products Table
+store_product = coffee_sales[['store_id', 'product_id']].copy().drop_duplicates().sort_values(by=['store_id', 'product_id']).reset_index(drop=True)
+#### Creating the 'base_price' column 
+coffee_sales_grouped = coffee_sales.groupby(['store_id','product_id'])['unit_price'].max().reset_index()
+store_product = store_product.merge(coffee_sales_grouped, on=['store_id', 'product_id'], how='left')
+store_product.rename(columns={'unit_price': 'base_price'}, inplace=True)
+print("Store_Products table created successfully.")
+
 print("Data extraction and transformation completed successfully.")
+
+
