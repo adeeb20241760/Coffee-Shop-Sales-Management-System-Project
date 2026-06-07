@@ -37,3 +37,10 @@ if duplicates_removed > 0:
 else:
     print("No duplicate rows found in the dataset.")
 
+## Date & Time Formatting
+
+coffee_sales['transaction_date'] = pd.to_datetime(coffee_sales['transaction_date'], format = '%Y-%m-%d')
+coffee_sales['transaction_time'] = pd.to_datetime(coffee_sales['transaction_time'], format = '%H:%M:%S').dt.time
+print("Date and Time columns formatted successfully.")    
+
+print("Data extraction and transformation completed successfully.")
