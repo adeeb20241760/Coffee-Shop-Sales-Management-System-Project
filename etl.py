@@ -27,3 +27,13 @@ for column in numeric_columns:
 coffee_sales = coffee_sales[(coffee_sales[numeric_columns] >= 0).all(axis=1)]    
 print("Negative values removed from the dataset.")   
 
+## Removing Duplicates
+initial_row_count = shape(coffee_sales)[0]
+coffee_sales = coffee_sales.drop_duplicates()
+duplicates_removed = initial_row_count - shape(coffee_sales)[0]
+
+if duplicates_removed > 0:
+    print(f"Removed {duplicates_removed} duplicate rows.")
+else:
+    print("No duplicate rows found in the dataset.")
+
