@@ -15,3 +15,15 @@ if null_values_removed > 0:
 else:
     print("No null values found in the dataset.")    
 
+## Removing Negative Values
+numeric_columns = coffee_sales.select_dtypes(include=['number']).columns
+numeric_columns
+
+for column in numeric_columns:
+    negative_values = coffee_sales[coffee_sales[column] < 0 ]
+    if not negative_values.empty:
+        print(f"Negative Values found in column {column}:")
+
+coffee_sales = coffee_sales[(coffee_sales[numeric_columns] >= 0).all(axis=1)]    
+print("Negative values removed from the dataset.")   
+
